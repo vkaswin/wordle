@@ -1,8 +1,6 @@
 <script setup>
 import { ref, toRefs, watch } from "vue";
 
-let alertRef = ref();
-
 let props = defineProps({ message: { type: String, default: "" } });
 
 watch(
@@ -23,7 +21,7 @@ let { message } = toRefs(props);
 
 <template>
   <teleport to="body" v-if="message.length !== 0">
-    <div ref="alertRef" :class="styles.alert" v-text="message"></div>
+    <div :class="styles.alert" v-text="message"></div>
   </teleport>
 </template>
 
