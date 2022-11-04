@@ -1,9 +1,3 @@
-<template>
-  <teleport to="body" v-if="message.length !== 0">
-    <div ref="alertRef" :class="styles.alert" v-text="message"></div>
-  </teleport>
-</template>
-
 <script setup>
 import { ref, toRefs, watch } from "vue";
 
@@ -26,6 +20,12 @@ let emit = defineEmits(["onClose"]);
 
 let { message } = toRefs(props);
 </script>
+
+<template>
+  <teleport to="body" v-if="message.length !== 0">
+    <div ref="alertRef" :class="styles.alert" v-text="message"></div>
+  </teleport>
+</template>
 
 <style lang="scss" module="styles">
 .alert {

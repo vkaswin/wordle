@@ -1,3 +1,21 @@
+<script setup>
+import keyboard from "@/data/keyboard.json";
+
+const emit = defineEmits(["onKeyBoard", "onEnter", "onBackSpace"]);
+
+const handleClick = (key) => {
+  if (key === "enter") {
+    emit("onEnter");
+  } else if (key === "backspace") {
+    emit("onBackSpace");
+  } else {
+    emit("onKeyBoard", key);
+  }
+};
+
+const { one, two, three } = keyboard;
+</script>
+
 <template>
   <div :class="styles.keyboard_container">
     <div :class="styles.keyboard_row">
@@ -35,24 +53,6 @@
     </div>
   </div>
 </template>
-
-<script setup>
-import keyboard from "@/utils/keyboard.json";
-
-const emit = defineEmits(["onKeyBoard", "onEnter", "onBackSpace"]);
-
-const handleClick = (key) => {
-  if (key === "enter") {
-    emit("onEnter");
-  } else if (key === "backspace") {
-    emit("onBackSpace");
-  } else {
-    emit("onKeyBoard", key);
-  }
-};
-
-const { one, two, three } = keyboard;
-</script>
 
 <style lang="scss" module="styles">
 .keyboard_container {

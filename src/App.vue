@@ -1,38 +1,3 @@
-<template>
-  <div :class="styles.header">
-    <div :class="styles.title">
-      <b>Wordle</b>
-    </div>
-    <div :class="styles.switch_btn">
-      <i class="fas fa-sun" v-if="theme === 'light'"></i>
-      <i class="fas fa-moon" v-if="theme === 'dark'"></i>
-      <Switch v-model="theme" />
-    </div>
-  </div>
-  <div :class="styles.container">
-    <WordTiles :rows="rows" :word="word" />
-    <KeyBoard
-      @onKeyBoard="addWordInTile"
-      @onBackSpace="handleBackSpace"
-      @onEnter="handleEnter"
-    />
-  </div>
-  <Modal :isOpen="win" :toggle="reset">
-    <div :class="styles.popup_msg">
-      <span>Won the game!</span>
-      <button @click="reset">Restart</button>
-    </div>
-  </Modal>
-  <Modal :isOpen="lose" :toggle="reset">
-    <div :class="styles.popup_msg">
-      <span>Lost the game!</span>
-      <span>The word is {{ word }}</span>
-      <button @click="reset">Restart</button>
-    </div>
-  </Modal>
-  <Alert :message="message" @onClose="message = ''" />
-</template>
-
 <script setup>
 import { onMounted, reactive, toRefs, watch } from "vue";
 import KeyBoard from "@/components/KeyBoard.vue";
@@ -40,7 +5,7 @@ import WordTiles from "@/components/WordTiles.vue";
 import Modal from "@/components/Modal.vue";
 import Alert from "@/components/Alert.vue";
 import Switch from "./components/Switch.vue";
-import words from "@/utils/words.json";
+import words from "@/data/words.json";
 
 const wordList = new Set(words);
 
@@ -234,6 +199,41 @@ const addWordInTile = (letter) => {
 
 let { rows, word, win, lose, theme, message } = toRefs(state);
 </script>
+
+<template>
+  <div :class="styles.header">
+    <div :class="styles.title">
+      <b>Wordle</b>
+    </div>
+    <div :class="styles.switch_btn">
+      <i class="fas fa-sun" v-if="theme === 'light'"></i>
+      <i class="fas fa-moon" v-if="theme === 'dark'"></i>
+      <Switch v-model="theme" />
+    </div>
+  </div>
+  <div :class="styles.container">
+    <WordTiles :rows="rows" :word="word" />
+    <KeyBoard
+      @onKeyBoard="addWordInTile"
+      @onBackSpace="handleBackSpace"
+      @onEnter="handleEnter"
+    />
+  </div>
+  <Modal :isOpen="win" :toggle="reset">
+    <div :class="styles.popup_msg">
+      <span>Won the game!</span>
+      <button @click="reset">Restart</button>
+    </div>
+  </Modal>
+  <Modal :isOpen="lose" :toggle="reset">
+    <div :class="styles.popup_msg">
+      <span>Lost the game!</span>
+      <span>The word is {{ word }}</span>
+      <button @click="reset">Restart</button>
+    </div>
+  </Modal>
+  <Alert :message="message" @onClose="message = ''" />
+</template>
 
 <style lang="scss" module="styles">
 .header {

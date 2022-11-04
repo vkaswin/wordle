@@ -1,19 +1,3 @@
-<template>
-  <div :class="styles.rows">
-    <template v-for="(row, index) in rows">
-      <div
-        v-for="i in 5"
-        :key="i"
-        :class="styles.card"
-        data-state
-        :data-row="index"
-        :data-id="i"
-        v-text="row[i - 1] ?? ''"
-      ></div>
-    </template>
-  </div>
-</template>
-
 <script>
 export default {
   inheritAttrs: false,
@@ -32,6 +16,22 @@ const props = defineProps({
 
 const { rows } = toRefs(props);
 </script>
+
+<template>
+  <div :class="styles.rows">
+    <template v-for="(row, index) in rows">
+      <div
+        v-for="i in 5"
+        :key="i"
+        :class="styles.card"
+        data-state
+        :data-row="index"
+        :data-id="i"
+        v-text="row[i - 1] ?? ''"
+      ></div>
+    </template>
+  </div>
+</template>
 
 <style lang="scss" module="styles">
 .rows {

@@ -1,21 +1,3 @@
-<template>
-  <teleport to="body">
-    <div v-if="show">
-      <div :class="['modal', { show: isOpen }]" @click="isOpen && toggle()">
-        <div class="modal_dialog" @animationend="handleAnimationEnd">
-          <div class="modal_content" @click.stop>
-            <slot></slot>
-          </div>
-        </div>
-      </div>
-      <div
-        :class="['overlay', { show: isOpen }]"
-        @click="isOpen && toggle()"
-      ></div>
-    </div>
-  </teleport>
-</template>
-
 <script setup>
 import { toRefs, ref, watchEffect } from "vue";
 
@@ -42,6 +24,24 @@ const handleAnimationEnd = ({ animationName }) => {
 
 let { isOpen, toggle } = toRefs(props);
 </script>
+
+<template>
+  <teleport to="body">
+    <div v-if="show">
+      <div :class="['modal', { show: isOpen }]" @click="isOpen && toggle()">
+        <div class="modal_dialog" @animationend="handleAnimationEnd">
+          <div class="modal_content" @click.stop>
+            <slot></slot>
+          </div>
+        </div>
+      </div>
+      <div
+        :class="['overlay', { show: isOpen }]"
+        @click="isOpen && toggle()"
+      ></div>
+    </div>
+  </teleport>
+</template>
 
 <style lang="scss" scoped>
 .modal {

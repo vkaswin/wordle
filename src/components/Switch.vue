@@ -1,3 +1,16 @@
+<script setup>
+import { toRefs } from "vue";
+
+let props = defineProps({
+  label: { type: String, default: "" },
+  modelValue: { type: String, default: "dark" },
+});
+
+let emit = defineEmits(["update:modelValue"]);
+
+let { label, modelValue } = toRefs(props);
+</script>
+
 <template>
   <div class="switch">
     <input
@@ -13,19 +26,6 @@
     </label>
   </div>
 </template>
-
-<script setup>
-import { toRefs } from "vue";
-
-let props = defineProps({
-  label: { type: String, default: "" },
-  modelValue: { type: String, default: "dark" },
-});
-
-let emit = defineEmits(["update:modelValue"]);
-
-let { label, modelValue } = toRefs(props);
-</script>
 
 <style lang="scss">
 .switch {
